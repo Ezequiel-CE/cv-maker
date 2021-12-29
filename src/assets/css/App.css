@@ -30,18 +30,21 @@
 }
 
 .Personal-section,
-.Education-section {
+.Education-section,
+.Work-section {
   margin: 10px;
 }
 
 .Personal-section h2,
-.Education-section h2 {
+.Education-section h2,
+.Work-section h2 {
   font-size: 30px;
   margin-bottom: 10px;
 }
 
 .Personal-section form,
-.Education-section form {
+.Education-section form,
+.Work-section form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -50,13 +53,15 @@
 
 .Personal-section input,
 .Personal-section textarea,
-.Education-section input {
+.Education-section input,
+.Work-section input {
   font-size: 15px;
   padding: 5px;
 }
 
 .Personal-section button,
-.Education-section button {
+.Education-section button,
+.Work-section button {
   padding: 5px 20px;
   margin: 10px 0;
 }
@@ -64,4 +69,14 @@
 .btn-part {
   display: flex;
   gap: 10px;
+}
+
+.block {
+  display: block;
+}
+.btn-submit {
+  display: block;
+  padding: 5px 20px;
+  margin: 10px auto;
+  width: 98%;
 }

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "../../assets/css/App.css";
-import EducationForm from "./EducationForm";
 import uniqid from "uniqid";
+import WorkForm from "./WorkForm";
 
-class Education extends Component {
+class Work extends Component {
   constructor(props) {
     super(props);
     this.state = { children: [{ name: "form", id: uniqid() }] };
@@ -28,15 +28,15 @@ class Education extends Component {
 
   render() {
     return (
-      <div className="Education-section">
-        <h2>Education</h2>
+      <div className="Work-section">
+        <h2>Work Experience</h2>
         {this.state.children.length < 1 ? (
           <button className="block" onClick={this.addForm}>
             add
           </button>
         ) : (
           this.state.children.map((el, i) => (
-            <EducationForm
+            <WorkForm
               key={el.id}
               addForm={this.addForm}
               deleteForm={this.deleteForm}
@@ -49,4 +49,4 @@ class Education extends Component {
   }
 }
 
-export default Education;
+export default Work;

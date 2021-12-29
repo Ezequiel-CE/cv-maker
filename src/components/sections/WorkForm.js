@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import "../../assets/css/App.css";
 
-class EducationForm extends Component {
+class WorkForm extends Component {
   render() {
     return (
       <>
         <form>
-          <input type="text" placeholder="University name" />
+          <input type="text" placeholder="Position" />
+          <input type="text" placeholder="Company" />
           <input type="text" placeholder="City" />
-          <input type="text" placeholder="Degree" />
-          <input type="text" placeholder="Subject" />
           <input type="text" placeholder="From" />
           <input type="text" placeholder="to" />
           <div className="btn-part">
@@ -24,4 +23,4 @@ class EducationForm extends Component {
   }
 }
 
-export default EducationForm;
+export default WorkForm;
