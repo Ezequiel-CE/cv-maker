@@ -1,0 +1,67 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: gray;
+  padding: 20px 0 20px 40px;
+}
+
+.header img {
+  height: 60px;
+  width: auto;
+}
+
+.main {
+  border-radius: 5px;
+  background-color: #eeeeee;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.header h1 {
+  font-size: 40px;
+}
+
+.Personal-section,
+.Education-section {
+  margin: 10px;
+}
+
+.Personal-section h2,
+.Education-section h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.Personal-section form,
+.Education-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.Personal-section input,
+.Personal-section textarea,
+.Education-section input {
+  font-size: 15px;
+  padding: 5px;
+}
+
+.Personal-section button,
+.Education-section button {
+  padding: 5px 20px;
+  margin: 10px 0;
+}
+
+.btn-part {
+  display: flex;
+  gap: 10px;
+}
