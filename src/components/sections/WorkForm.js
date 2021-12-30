@@ -4,53 +4,40 @@ import "../../assets/css/App.css";
 class WorkForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      position: "",
-      company: "",
-      city: "",
-      from: "",
-      to: "",
-    };
+
     this.inputHandler = this.inputHandler.bind(this);
   }
 
   inputHandler(e) {
     const inputName = e.target.name;
+    const { id, formInfo, getInfoIndividual } = this.props;
 
     switch (inputName) {
       case "position":
-        this.setState({ position: e.target.value });
+        getInfoIndividual({ ...formInfo, position: e.target.value }, id);
         break;
       case "company":
-        this.setState({ company: e.target.value });
+        getInfoIndividual({ ...formInfo, company: e.target.value }, id);
         break;
       case "city":
-        this.setState({ city: e.target.value });
+        getInfoIndividual({ ...formInfo, city: e.target.value }, id);
         break;
-      case "from":
-        this.setState({ from: e.target.value });
+      case "From":
+        getInfoIndividual({ ...formInfo, from: e.target.value }, id);
         break;
-      case "to":
-        this.setState({ to: e.target.value });
+
+      case "To":
+        getInfoIndividual({ ...formInfo, to: e.target.value }, id);
         break;
       default:
         console.log("not found");
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    //evita el loop ,solo pasa cuando se cambia el estado
-    if (JSON.stringify(prevState) === JSON.stringify(this.state)) return;
-    const StateCopy = { ...this.state };
-    const id = this.props.id;
-
-    this.props.update(StateCopy, id);
-  }
-
   render() {
     const { deleteForm, id } = this.props;
 
-    const { position, company, city, from, to } = this.state;
+    const { position, company, city, from, to } = this.props.formInfo;
 
     return (
       <>

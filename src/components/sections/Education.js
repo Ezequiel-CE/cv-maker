@@ -32,7 +32,6 @@ class Education extends Component {
               deleteForm={deleteForm}
               id={el.id}
               getInfoIndividual={this.getInfoIndividual}
-              update={this.findAndUpdateForms}
             />
           ))
         )}

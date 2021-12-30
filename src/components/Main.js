@@ -31,13 +31,27 @@ class Main extends Component {
           id: uniqid(),
         },
       ],
-      workInfor: [],
+      workInfo: [
+        {
+          info: {
+            position: "",
+            company: "",
+            city: "",
+            from: "",
+            to: "",
+          },
+          id: uniqid(),
+        },
+      ],
     };
 
     this.getInfoPersonal = this.getInfoPersonal.bind(this);
-    this.addForm = this.addForm.bind(this);
-    this.deleteForm = this.deleteForm.bind(this);
+    this.addFormEducation = this.addFormEducation.bind(this);
+    this.deleteFormEducation = this.deleteFormEducation.bind(this);
     this.getInfoEducation = this.getInfoEducation.bind(this);
+    this.deleteFormWork = this.deleteFormWork.bind(this);
+    this.addFormWork = this.addFormWork.bind(this);
+    this.getInfoWork = this.getInfoWork.bind(this);
   }
 
   //get info functions
@@ -50,7 +64,11 @@ class Main extends Component {
     this.setState({ educationInfo: data });
   }
 
-  //add education form form
+  getInfoWork(data) {
+    this.setState({ educationInfo: data });
+  }
+
+  //form education
 
   addFormEducation(e) {
     e.preventDefault();
@@ -79,6 +97,33 @@ class Main extends Component {
     });
   }
 
+  //form work
+  addFormWork(e) {
+    e.preventDefault();
+    this.setState({
+      workInfo: [
+        ...this.state.workInfo,
+        {
+          info: {
+            position: "",
+            company: "",
+            city: "",
+            from: "",
+            to: "",
+          },
+          id: uniqid(),
+        },
+      ],
+    });
+  }
+
+  deleteFormWork(e, id) {
+    e.preventDefault();
+    this.setState({
+      workInfo: this.state.workInfo.filter((form) => form.id !== id),
+    });
+  }
+
   render() {
     const { show } = this.props;
     return (
@@ -93,7 +138,12 @@ class Main extends Component {
           educationInfo={this.state.educationInfo}
           getInfoEducation={this.getInfoEducation}
         />
-        <Work />
+        <Work
+          addForm={this.addFormWork}
+          deleteForm={this.deleteFormWork}
+          workInfo={this.state.workInfo}
+          getInfoWork={this.getInfoWork}
+        />
         <button className="btn-preview" onClick={show}>
           Preview
         </button>

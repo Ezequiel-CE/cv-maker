@@ -10,7 +10,6 @@ class EducationForm extends Component {
   inputHandler(e) {
     const inputName = e.target.name;
     const { id, formInfo, getInfoIndividual } = this.props;
-    console.log(formInfo);
 
     switch (inputName) {
       case "UniversityName":
@@ -39,7 +38,7 @@ class EducationForm extends Component {
 
   render() {
     const { deleteForm, id } = this.props;
-    // const { name, city, degree, subject, from, to } = this.state;
+    const { name, city, degree, subject, from, to } = this.props.formInfo;
     return (
       <>
         <form>
@@ -48,42 +47,42 @@ class EducationForm extends Component {
             placeholder="University name"
             name="UniversityName"
             onChange={this.inputHandler}
-            // value={name}
+            value={name}
           />
           <input
             type="text"
             placeholder="City"
             name="City"
             onChange={this.inputHandler}
-            // value={city}
+            value={city}
           />
           <input
             type="text"
             placeholder="Degree"
             name="Degree"
             onChange={this.inputHandler}
-            // value={degree}
+            value={degree}
           />
           <input
             type="text"
             placeholder="Subject"
             name="Subject"
             onChange={this.inputHandler}
-            // value={subject}
+            value={subject}
           />
           <input
             type="text"
             placeholder="From"
             name="From"
             onChange={this.inputHandler}
-            // value={from}
+            value={from}
           />
           <input
             type="text"
             placeholder="to"
             name="To"
             onChange={this.inputHandler}
-            // value={to}
+            value={to}
           />
           <div className="btn-part">
             <button className="btn-edu" onClick={(e) => deleteForm(e, id)}>

@@ -1,57 +1,41 @@
 import React, { Component } from "react";
 import "../../assets/css/App.css";
-import uniqid from "uniqid";
 import WorkForm from "./WorkForm";
 
 class Work extends Component {
   constructor(props) {
     super(props);
-    this.state = { children: [{ name: "form", id: uniqid() }] };
 
-    this.addForm = this.addForm.bind(this);
-    this.deleteForm = this.deleteForm.bind(this);
-    this.trackChangesOnInputs = this.trackChangesOnInputs.bind(this);
+    this.getInfoIndividual = this.getInfoIndividual.bind(this);
   }
 
-  addForm(e) {
-    e.preventDefault();
-    this.setState({
-      children: [...this.state.children, { name: "form", id: uniqid() }],
-    });
-  }
-
-  deleteForm(e, id) {
-    e.preventDefault();
-    this.setState({
-      children: this.state.children.filter((child) => child.id !== id),
-    });
-  }
-
-  trackChangesOnInputs(state, id) {
-    const childrenStateCopy = [...this.state.children];
-    const updatedFormIndex = childrenStateCopy.findIndex((el) => el.id === id);
-    childrenStateCopy[updatedFormIndex].info = state;
-    this.setState({ children: childrenStateCopy });
+  getInfoIndividual(data, id) {
+    const workArray = [...this.props.workInfo];
+    const updatedFormIndex = workArray.findIndex((el) => el.id === id);
+    workArray[updatedFormIndex].info = data;
+    this.props.getInfoWork(workArray);
   }
 
   render() {
+    const { addForm, deleteForm, workInfo } = this.props;
+
     return (
       <div className="Work-section">
         <h2>Work Experience</h2>
-        {this.state.children.length < 1 ? (
+        {workInfo.length < 1 ? (
           <> </>
         ) : (
-          this.state.children.map((el) => (
+          workInfo.map((el) => (
             <WorkForm
+              formInfo={el.info}
               key={el.id}
-              addForm={this.addForm}
-              deleteForm={this.deleteForm}
+              deleteForm={deleteForm}
               id={el.id}
-              update={this.trackChangesOnInputs}
+              getInfoIndividual={this.getInfoIndividual}
             />
           ))
         )}
-        <button className="btn-add" onClick={this.addForm}>
+        <button className="btn-add" onClick={addForm}>
           add
         </button>
       </div>
