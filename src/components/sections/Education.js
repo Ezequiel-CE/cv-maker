@@ -1,63 +1,42 @@
 import React, { Component } from "react";
 import "../../assets/css/App.css";
 import EducationForm from "./EducationForm";
-import uniqid from "uniqid";
 
 class Education extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      children: [
-        {
-          name: "form",
-          id: uniqid(),
-        },
-      ],
-    };
 
-    this.addForm = this.addForm.bind(this);
-    this.deleteForm = this.deleteForm.bind(this);
-    this.trackChangesOnInputs = this.trackChangesOnInputs.bind(this);
+    this.getInfoIndividual = this.getInfoIndividual.bind(this);
   }
 
-  addForm(e) {
-    e.preventDefault();
-    this.setState({
-      children: [...this.state.children, { name: "form", id: uniqid() }],
-    });
-  }
-
-  deleteForm(e, id) {
-    e.preventDefault();
-    this.setState({
-      children: this.state.children.filter((child) => child.id !== id),
-    });
-  }
-
-  trackChangesOnInputs(state, id) {
-    const childrenStateCopy = [...this.state.children];
-    const updatedFormIndex = childrenStateCopy.findIndex((el) => el.id === id);
-    childrenStateCopy[updatedFormIndex].info = state;
-    this.setState({ children: childrenStateCopy });
+  getInfoIndividual(data, id) {
+    const educationArray = [...this.props.educationInfo];
+    const updatedFormIndex = educationArray.findIndex((el) => el.id === id);
+    educationArray[updatedFormIndex].info = data;
+    this.props.getInfoEducation(educationArray);
   }
 
   render() {
+    const { addForm, deleteForm, educationInfo } = this.props;
+
     return (
       <div className="Education-section">
         <h2>Education</h2>
-        {this.state.children.length < 1 ? (
+        {educationInfo.length < 1 ? (
           <></>
         ) : (
-          this.state.children.map((el, i) => (
+          educationInfo.map((el) => (
             <EducationForm
+              formInfo={el.info}
               key={el.id}
-              deleteForm={this.deleteForm}
+              deleteForm={deleteForm}
               id={el.id}
-              update={this.trackChangesOnInputs}
+              getInfoIndividual={this.getInfoIndividual}
+              update={this.findAndUpdateForms}
             />
           ))
         )}
-        <button className="btn-add" onClick={this.addForm}>
+        <button className="btn-add" onClick={addForm}>
           add
         </button>
       </div>

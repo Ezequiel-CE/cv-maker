@@ -4,58 +4,42 @@ import "../../assets/css/App.css";
 class EducationForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: "",
-      city: "",
-      degree: "",
-      subject: "",
-      from: "",
-      to: "",
-    };
     this.inputHandler = this.inputHandler.bind(this);
   }
 
   inputHandler(e) {
     const inputName = e.target.name;
+    const { id, formInfo, getInfoIndividual } = this.props;
+    console.log(formInfo);
 
     switch (inputName) {
       case "UniversityName":
-        this.setState({ name: e.target.value });
+        getInfoIndividual({ ...formInfo, name: e.target.value }, id);
         break;
       case "City":
-        this.setState({ city: e.target.value });
+        getInfoIndividual({ ...formInfo, city: e.target.value }, id);
         break;
       case "Degree":
-        this.setState({ degree: e.target.value });
+        getInfoIndividual({ ...formInfo, degree: e.target.value }, id);
         break;
       case "Subject":
-        this.setState({ subject: e.target.value });
+        getInfoIndividual({ ...formInfo, subject: e.target.value }, id);
         break;
       case "From":
-        this.setState({ from: e.target.value });
+        getInfoIndividual({ ...formInfo, from: e.target.value }, id);
         break;
 
       case "To":
-        this.setState({ to: e.target.value });
+        getInfoIndividual({ ...formInfo, to: e.target.value }, id);
         break;
       default:
         console.log("not found");
     }
   }
 
-  //lifecycle hook
-  componentDidUpdate(prevProps, prevState) {
-    //evita el loop ,solo pasa cuando se cambia el estado
-    if (JSON.stringify(prevState) === JSON.stringify(this.state)) return;
-    const StateCopy = { ...this.state };
-    const id = this.props.id;
-
-    this.props.update(StateCopy, id);
-  }
-
   render() {
     const { deleteForm, id } = this.props;
-    const { name, city, degree, subject, from, to } = this.state;
+    // const { name, city, degree, subject, from, to } = this.state;
     return (
       <>
         <form>
@@ -64,42 +48,42 @@ class EducationForm extends Component {
             placeholder="University name"
             name="UniversityName"
             onChange={this.inputHandler}
-            value={name}
+            // value={name}
           />
           <input
             type="text"
             placeholder="City"
             name="City"
             onChange={this.inputHandler}
-            value={city}
+            // value={city}
           />
           <input
             type="text"
             placeholder="Degree"
             name="Degree"
             onChange={this.inputHandler}
-            value={degree}
+            // value={degree}
           />
           <input
             type="text"
             placeholder="Subject"
             name="Subject"
             onChange={this.inputHandler}
-            value={subject}
+            // value={subject}
           />
           <input
             type="text"
             placeholder="From"
             name="From"
             onChange={this.inputHandler}
-            value={from}
+            // value={from}
           />
           <input
             type="text"
             placeholder="to"
             name="To"
             onChange={this.inputHandler}
-            value={to}
+            // value={to}
           />
           <div className="btn-part">
             <button className="btn-edu" onClick={(e) => deleteForm(e, id)}>

@@ -7,7 +7,7 @@ import Preview from "./components/preview";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { preview: true };
+    this.state = { preview: false };
 
     this.showPreview = this.showPreview.bind(this);
   }

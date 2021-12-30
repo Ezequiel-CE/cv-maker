@@ -4,42 +4,55 @@ import "../../assets/css/App.css";
 class Personal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      firstName: "",
-      lastName: "",
-      profession: "",
-      address: "",
-      phoneNumber: "",
-      email: "",
-      description: "",
-    };
     this.inputHandler = this.inputHandler.bind(this);
   }
 
   inputHandler(e) {
+    const { getInfoPersonal, personalInfo } = this.props;
     const inputName = e.target.name;
 
     switch (inputName) {
       case "firstName":
-        this.setState({ firstName: e.target.value });
+        getInfoPersonal({
+          ...personalInfo,
+          firstName: e.target.value,
+        });
         break;
       case "lastName":
-        this.setState({ lastName: e.target.value });
+        getInfoPersonal({
+          ...personalInfo,
+          lastName: e.target.value,
+        });
         break;
       case "address":
-        this.setState({ address: e.target.value });
+        getInfoPersonal({
+          ...personalInfo,
+          address: e.target.value,
+        });
         break;
       case "profession":
-        this.setState({ profession: e.target.value });
+        getInfoPersonal({
+          ...personalInfo,
+          profession: e.target.value,
+        });
         break;
       case "number":
-        this.setState({ phoneNumber: e.target.value });
+        getInfoPersonal({
+          ...personalInfo,
+          number: e.target.value,
+        });
         break;
       case "mail":
-        this.setState({ email: e.target.value });
+        getInfoPersonal({
+          ...personalInfo,
+          mail: e.target.value,
+        });
         break;
       case "description":
-        this.setState({ description: e.target.value });
+        getInfoPersonal({
+          ...personalInfo,
+          description: e.target.value,
+        });
         break;
       default:
         console.log("not found");
@@ -55,7 +68,7 @@ class Personal extends Component {
       phoneNumber,
       email,
       description,
-    } = this.state;
+    } = this.props.personalInfo;
     return (
       <div className="Personal-section">
         <h2>Personal Information</h2>
