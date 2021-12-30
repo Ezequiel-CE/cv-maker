@@ -7,6 +7,7 @@ class Personal extends Component {
     this.state = {
       firstName: "",
       lastName: "",
+      profession: "",
       address: "",
       phoneNumber: "",
       email: "",
@@ -28,6 +29,9 @@ class Personal extends Component {
       case "address":
         this.setState({ address: e.target.value });
         break;
+      case "profession":
+        this.setState({ profession: e.target.value });
+        break;
       case "number":
         this.setState({ phoneNumber: e.target.value });
         break;
@@ -43,8 +47,15 @@ class Personal extends Component {
   }
 
   render() {
-    const { firstName, lastName, address, phoneNumber, email, description } =
-      this.state;
+    const {
+      firstName,
+      lastName,
+      profession,
+      address,
+      phoneNumber,
+      email,
+      description,
+    } = this.state;
     return (
       <div className="Personal-section">
         <h2>Personal Information</h2>
@@ -62,6 +73,13 @@ class Personal extends Component {
             name="lastName"
             onChange={this.inputHandler}
             value={lastName}
+          />
+          <input
+            type="text"
+            placeholder="Profession"
+            name="profession"
+            onChange={this.inputHandler}
+            value={profession}
           />
           <input
             type="text"
