@@ -52,6 +52,7 @@ class Main extends Component {
     this.deleteFormWork = this.deleteFormWork.bind(this);
     this.addFormWork = this.addFormWork.bind(this);
     this.getInfoWork = this.getInfoWork.bind(this);
+    this.onclickPreview = this.onclickPreview.bind(this);
   }
 
   //get info functions
@@ -65,7 +66,7 @@ class Main extends Component {
   }
 
   getInfoWork(data) {
-    this.setState({ educationInfo: data });
+    this.setState({ workInfo: data });
   }
 
   //form education
@@ -124,8 +125,21 @@ class Main extends Component {
     });
   }
 
+  onclickPreview() {
+    const { show, getInfo } = this.props;
+
+    const copy = { ...this.state };
+    show();
+    getInfo(copy);
+  }
+
+  //remember the data from the previous state
+  componentDidMount() {
+    const { info } = this.props;
+    this.setState(info);
+  }
+
   render() {
-    const { show } = this.props;
     return (
       <div className="main">
         <Personal
@@ -144,7 +158,7 @@ class Main extends Component {
           workInfo={this.state.workInfo}
           getInfoWork={this.getInfoWork}
         />
-        <button className="btn-preview" onClick={show}>
+        <button className="btn-preview" onClick={this.onclickPreview}>
           Preview
         </button>
         <button className="btn-submit">Submit</button>

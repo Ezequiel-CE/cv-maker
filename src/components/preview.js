@@ -48,7 +48,7 @@ class Preview extends Component {
             </section>
           </main>
         </div>
-        <button onClick={show}>Continue edit</button>
+        <button onClick={() => show()}>Continue edit</button>
       </>
     );
   }
