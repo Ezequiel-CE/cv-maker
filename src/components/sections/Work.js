@@ -10,6 +10,7 @@ class Work extends Component {
 
     this.addForm = this.addForm.bind(this);
     this.deleteForm = this.deleteForm.bind(this);
+    this.trackChangesOnInputs = this.trackChangesOnInputs.bind(this);
   }
 
   addForm(e) {
@@ -26,24 +27,33 @@ class Work extends Component {
     });
   }
 
+  trackChangesOnInputs(state, id) {
+    const childrenStateCopy = [...this.state.children];
+    const updatedFormIndex = childrenStateCopy.findIndex((el) => el.id === id);
+    childrenStateCopy[updatedFormIndex].info = state;
+    this.setState({ children: childrenStateCopy });
+  }
+
   render() {
     return (
       <div className="Work-section">
         <h2>Work Experience</h2>
         {this.state.children.length < 1 ? (
-          <button className="block" onClick={this.addForm}>
-            add
-          </button>
+          <> </>
         ) : (
-          this.state.children.map((el, i) => (
+          this.state.children.map((el) => (
             <WorkForm
               key={el.id}
               addForm={this.addForm}
               deleteForm={this.deleteForm}
               id={el.id}
+              update={this.trackChangesOnInputs}
             />
           ))
         )}
+        <button className="btn-add" onClick={this.addForm}>
+          add
+        </button>
       </div>
     );
   }

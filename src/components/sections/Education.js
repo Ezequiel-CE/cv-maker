@@ -6,10 +6,18 @@ import uniqid from "uniqid";
 class Education extends Component {
   constructor(props) {
     super(props);
-    this.state = { children: [{ name: "form", id: uniqid() }] };
+    this.state = {
+      children: [
+        {
+          name: "form",
+          id: uniqid(),
+        },
+      ],
+    };
 
     this.addForm = this.addForm.bind(this);
     this.deleteForm = this.deleteForm.bind(this);
+    this.trackChangesOnInputs = this.trackChangesOnInputs.bind(this);
   }
 
   addForm(e) {
@@ -26,24 +34,32 @@ class Education extends Component {
     });
   }
 
+  trackChangesOnInputs(state, id) {
+    const childrenStateCopy = [...this.state.children];
+    const updatedFormIndex = childrenStateCopy.findIndex((el) => el.id === id);
+    childrenStateCopy[updatedFormIndex].info = state;
+    this.setState({ children: childrenStateCopy });
+  }
+
   render() {
     return (
       <div className="Education-section">
         <h2>Education</h2>
         {this.state.children.length < 1 ? (
-          <button className="block" onClick={this.addForm}>
-            add
-          </button>
+          <></>
         ) : (
           this.state.children.map((el, i) => (
             <EducationForm
               key={el.id}
-              addForm={this.addForm}
               deleteForm={this.deleteForm}
               id={el.id}
+              update={this.trackChangesOnInputs}
             />
           ))
         )}
+        <button className="btn-add" onClick={this.addForm}>
+          add
+        </button>
       </div>
     );
   }
