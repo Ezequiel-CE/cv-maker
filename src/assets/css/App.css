@@ -120,7 +120,7 @@
 
 .name-box {
   background-color: #143e72;
-  padding: 15px 15px 15px 20px;
+  padding: 20px 15px 30px 20px;
 }
 
 .name-box h1 {
@@ -136,12 +136,14 @@
 .preview-main {
   color: black;
   display: flex;
+  height: 680px;
 }
 
 .preview-personal {
   width: 30%;
   background-color: #dddddd;
   padding: 20px;
+  position: relative;
 }
 .personal-information {
   margin-top: 20px;
@@ -164,4 +166,40 @@
 
 .title {
   color: #143e72;
+}
+
+.experience-el {
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: 40% 50%;
+  align-items: center;
+  justify-items: start;
+}
+
+.experience-el p:last-child {
+  grid-column: 2 / 3;
+}
+
+.experience-el .title {
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.experience-el .sub {
+  font-weight: 300;
+}
+
+.description {
+  margin: 20px 0;
+}
+
+.preview-btn {
+  position: absolute;
+  display: block;
+  padding: 5px 20px;
+  margin: 10px auto;
+  width: 200px;
+  left: 100px;
 }

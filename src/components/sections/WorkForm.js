@@ -22,11 +22,11 @@ class WorkForm extends Component {
       case "city":
         getInfoIndividual({ ...formInfo, city: e.target.value }, id);
         break;
-      case "From":
+      case "from":
         getInfoIndividual({ ...formInfo, from: e.target.value }, id);
         break;
 
-      case "To":
+      case "to":
         getInfoIndividual({ ...formInfo, to: e.target.value }, id);
         break;
       default:

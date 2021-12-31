@@ -28,7 +28,10 @@ class App extends Component {
         <Header />
 
         {preview ? (
-          <Preview show={this.showPreview} />
+          <Preview
+            show={this.showPreview}
+            info={this.state.generalInformation}
+          />
         ) : (
           <Main
             show={this.showPreview}

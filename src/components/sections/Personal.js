@@ -39,13 +39,13 @@ class Personal extends Component {
       case "number":
         getInfoPersonal({
           ...personalInfo,
-          number: e.target.value,
+          phoneNumber: e.target.value,
         });
         break;
       case "mail":
         getInfoPersonal({
           ...personalInfo,
-          mail: e.target.value,
+          email: e.target.value,
         });
         break;
       case "description":

@@ -9,7 +9,7 @@ class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      personailInfo: {
+      personalInfo: {
         firstName: "",
         lastName: "",
         profession: "",
@@ -58,7 +58,7 @@ class Main extends Component {
   //get info functions
 
   getInfoPersonal(data) {
-    this.setState({ personailInfo: data });
+    this.setState({ personalInfo: data });
   }
 
   getInfoEducation(data) {
@@ -144,7 +144,7 @@ class Main extends Component {
       <div className="main">
         <Personal
           getInfoPersonal={this.getInfoPersonal}
-          personalInfo={this.state.personailInfo}
+          personalInfo={this.state.personalInfo}
         />
         <Education
           addForm={this.addFormEducation}
@@ -161,7 +161,7 @@ class Main extends Component {
         <button className="btn-preview" onClick={this.onclickPreview}>
           Preview
         </button>
-        <button className="btn-submit">Submit</button>
+        <button className="btn-submit">Download</button>
       </div>
     );
   }
