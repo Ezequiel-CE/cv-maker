@@ -24,9 +24,12 @@ class Preview extends Component {
             />
           </main>
         </div>
-        <button className="preview-btn" onClick={() => show()}>
-          Continue edit
-        </button>
+        <div className="preview-btn-section">
+          <button className="" onClick={() => show()}>
+            Continue edit
+          </button>
+          <button className="">Download</button>
+        </div>
       </>
     );
   }

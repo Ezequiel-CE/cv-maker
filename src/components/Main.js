@@ -161,7 +161,6 @@ class Main extends Component {
         <button className="btn-preview" onClick={this.onclickPreview}>
           Preview
         </button>
-        <button className="btn-submit">Download</button>
       </div>
     );
   }

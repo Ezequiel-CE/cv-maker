@@ -203,3 +203,17 @@
   width: 200px;
   left: 100px;
 }
+
+.preview-btn-section {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: center;
+  padding: 5px 20px;
+  margin: 10px 0;
+}
+
+.preview-btn-section button {
+  padding: 5px 20px;
+  width: 200px;
+}
