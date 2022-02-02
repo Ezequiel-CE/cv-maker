@@ -15,7 +15,22 @@ class Preview extends Component {
 
   createpdf() {
     const element = document.getElementById("preview");
-    html2pdf().from(element).save();
+    let width = element.offsetWidth;
+    let height = element.offsetHeight;
+
+    let heightCM = (height * 2.54) / 96;
+    let widthCM = (width * 2.54) / 96;
+
+    html2pdf(element, {
+      margin: 0,
+      filename: "Curriculum.pdf",
+      html2canvas: { dpi: 96, letterRendering: true },
+      jsPDF: {
+        orientation: "portrait",
+        unit: "cm",
+        format: [heightCM, widthCM],
+      },
+    });
   }
 
   render() {
