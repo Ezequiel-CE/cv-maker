@@ -63,7 +63,6 @@ export const DataInformation = ({ dataP, dataE, dataW }) => {
 };
 
 export const ExperienceComponent = ({ data }) => {
-  console.log(data);
   const { position, company, city, from, to } = data.info;
   return (
     <div className="experience-el">
@@ -81,8 +80,6 @@ export const ExperienceComponent = ({ data }) => {
 };
 
 export const EducationceComponent = ({ data }) => {
-  console.log(data);
-
   const { name, degree, subject, from, to, city } = data.info;
   return (
     <div className="experience-el">
