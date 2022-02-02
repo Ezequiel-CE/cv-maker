@@ -7,8 +7,8 @@ A React app which allows users to create their own resume using a ready template
 ## Getting started
 
 ```
-git clone https://github.com/michalosman/cv-application.git
-cd cv-application
+git clone https://github.com/Ezequiel-CE/cv-maker.git
+cd cv-maker
 npm install
 npm start
 ```
