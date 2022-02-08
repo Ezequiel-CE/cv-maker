@@ -1,47 +1,36 @@
 import "./assets/css/App.css";
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Preview from "./components/preview";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { preview: false, generalInformation: {} };
+const App = () => {
+  const [preview, setPreview] = useState(false);
+  const [generalInformation, setGeneralInformation] = useState({});
 
-    this.showPreview = this.showPreview.bind(this);
-    this.getGeneralInformation = this.getGeneralInformation.bind(this);
-  }
+  const showPreview = () => {
+    setPreview(!preview);
+  };
 
-  showPreview() {
-    this.setState({ preview: !this.state.preview });
-  }
+  const getGeneralInformation = (data) => {
+    setGeneralInformation(data);
+  };
 
-  getGeneralInformation(data) {
-    this.setState({ generalInformation: data });
-  }
+  return (
+    <div>
+      <Header />
 
-  render() {
-    const { preview } = this.state;
-    return (
-      <div>
-        <Header />
-
-        {preview ? (
-          <Preview
-            show={this.showPreview}
-            info={this.state.generalInformation}
-          />
-        ) : (
-          <Main
-            show={this.showPreview}
-            getInfo={this.getGeneralInformation}
-            info={this.state.generalInformation}
-          />
-        )}
-      </div>
-    );
-  }
-}
+      {preview ? (
+        <Preview show={showPreview} info={generalInformation} />
+      ) : (
+        <Main
+          show={showPreview}
+          getInfo={getGeneralInformation}
+          info={generalInformation}
+        />
+      )}
+    </div>
+  );
+};
 
 export default App;
