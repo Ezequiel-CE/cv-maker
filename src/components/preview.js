@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   PersonalInformation,
   Header,
@@ -7,13 +7,8 @@ import {
 import "../assets/css/App.css";
 import html2pdf from "html2pdf.js";
 
-class Preview extends Component {
-  constructor(props) {
-    super(props);
-    this.createpdf = this.createpdf.bind(this);
-  }
-
-  createpdf() {
+const Preview = ({ show, info }) => {
+  const createpdf = () => {
     const element = document.getElementById("preview");
     let width = element.offsetWidth;
     let height = element.offsetHeight;
@@ -31,36 +26,32 @@ class Preview extends Component {
         format: [heightCM, widthCM],
       },
     });
-  }
+  };
 
-  render() {
-    const { show } = this.props;
-    const { personalInfo, educationInfo, workInfo } = this.props.info;
-
-    return (
-      <>
-        <div id="preview" className="preview">
-          <Header data={personalInfo} />
-          <main className="preview-main">
-            <PersonalInformation data={personalInfo} />
-            <DataInformation
-              dataP={personalInfo}
-              dataE={educationInfo}
-              dataW={workInfo}
-            />
-          </main>
-        </div>
-        <div className="preview-btn-section">
-          <button className="" onClick={() => show()}>
-            Continue edit
-          </button>
-          <button className="" onClick={this.createpdf}>
-            Download
-          </button>
-        </div>
-      </>
-    );
-  }
-}
+  const { personalInfo, educationInfo, workInfo } = info;
+  return (
+    <>
+      <div id="preview" className="preview">
+        <Header data={personalInfo} />
+        <main className="preview-main">
+          <PersonalInformation data={personalInfo} />
+          <DataInformation
+            dataP={personalInfo}
+            dataE={educationInfo}
+            dataW={workInfo}
+          />
+        </main>
+      </div>
+      <div className="preview-btn-section">
+        <button className="" onClick={show}>
+          Continue edit
+        </button>
+        <button className="" onClick={createpdf}>
+          Download
+        </button>
+      </div>
+    </>
+  );
+};
 
 export default Preview;
