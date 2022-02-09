@@ -1,14 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import "../../assets/css/App.css";
 
-class Personal extends Component {
-  constructor(props) {
-    super(props);
-    this.inputHandler = this.inputHandler.bind(this);
-  }
-
-  inputHandler(e) {
-    const { getInfoPersonal, personalInfo } = this.props;
+const Personal = ({ getInfoPersonal, personalInfo }) => {
+  const inputHandler = (e) => {
     const inputName = e.target.name;
 
     switch (inputName) {
@@ -57,75 +51,74 @@ class Personal extends Component {
       default:
         console.log("not found");
     }
-  }
+  };
 
-  render() {
-    const {
-      firstName,
-      lastName,
-      profession,
-      address,
-      phoneNumber,
-      email,
-      description,
-    } = this.props.personalInfo;
-    return (
-      <div className="Personal-section">
-        <h2>Personal Information</h2>
-        <form>
-          <input
-            type="text"
-            placeholder="First Name"
-            name="firstName"
-            onChange={this.inputHandler}
-            value={firstName}
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            name="lastName"
-            onChange={this.inputHandler}
-            value={lastName}
-          />
-          <input
-            type="text"
-            placeholder="Profession"
-            name="profession"
-            onChange={this.inputHandler}
-            value={profession}
-          />
-          <input
-            type="text"
-            placeholder="Adress"
-            name="address"
-            onChange={this.inputHandler}
-            value={address}
-          />
-          <input
-            type="text"
-            placeholder="Phone Number"
-            name="number"
-            onChange={this.inputHandler}
-            value={phoneNumber}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            name="mail"
-            onChange={this.inputHandler}
-            value={email}
-          />
-          <textarea
-            placeholder="Description"
-            rows="5"
-            name="description"
-            onChange={this.inputHandler}
-            value={description}
-          ></textarea>
-        </form>
-      </div>
-    );
-  }
-}
+  const {
+    firstName,
+    lastName,
+    profession,
+    address,
+    phoneNumber,
+    email,
+    description,
+  } = personalInfo;
+
+  return (
+    <div className="Personal-section">
+      <h2>Personal Information</h2>
+      <form>
+        <input
+          type="text"
+          placeholder="First Name"
+          name="firstName"
+          onChange={inputHandler}
+          value={firstName}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          name="lastName"
+          onChange={inputHandler}
+          value={lastName}
+        />
+        <input
+          type="text"
+          placeholder="Profession"
+          name="profession"
+          onChange={inputHandler}
+          value={profession}
+        />
+        <input
+          type="text"
+          placeholder="Adress"
+          name="address"
+          onChange={inputHandler}
+          value={address}
+        />
+        <input
+          type="text"
+          placeholder="Phone Number"
+          name="number"
+          onChange={inputHandler}
+          value={phoneNumber}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          name="mail"
+          onChange={inputHandler}
+          value={email}
+        />
+        <textarea
+          placeholder="Description"
+          rows="5"
+          name="description"
+          onChange={inputHandler}
+          value={description}
+        ></textarea>
+      </form>
+    </div>
+  );
+};
 
 export default Personal;
