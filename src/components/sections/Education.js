@@ -1,46 +1,42 @@
-import React, { Component } from "react";
+import React from "react";
 import "../../assets/css/App.css";
 import EducationForm from "./EducationForm";
 
-class Education extends Component {
-  constructor(props) {
-    super(props);
+const Education = ({
+  addForm,
+  deleteForm,
+  educationInfo,
+  getInfoEducation,
+}) => {
+  const getInfoIndividual = (data, id) => {
+    const educationArrayCopy = [...educationInfo];
+    const updatedFormIndex = educationArrayCopy.findIndex((el) => el.id === id);
+    educationArrayCopy[updatedFormIndex].info = data;
+    //update the main state from education
+    getInfoEducation(educationArrayCopy);
+  };
 
-    this.getInfoIndividual = this.getInfoIndividual.bind(this);
-  }
-
-  getInfoIndividual(data, id) {
-    const educationArray = [...this.props.educationInfo];
-    const updatedFormIndex = educationArray.findIndex((el) => el.id === id);
-    educationArray[updatedFormIndex].info = data;
-    this.props.getInfoEducation(educationArray);
-  }
-
-  render() {
-    const { addForm, deleteForm, educationInfo } = this.props;
-
-    return (
-      <div className="Education-section">
-        <h2>Education</h2>
-        {educationInfo.length < 1 ? (
-          <></>
-        ) : (
-          educationInfo.map((el) => (
-            <EducationForm
-              formInfo={el.info}
-              key={el.id}
-              deleteForm={deleteForm}
-              id={el.id}
-              getInfoIndividual={this.getInfoIndividual}
-            />
-          ))
-        )}
-        <button className="btn-add" onClick={addForm}>
-          add
-        </button>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="Education-section">
+      <h2>Education</h2>
+      {educationInfo.length < 1 ? (
+        <></>
+      ) : (
+        educationInfo.map((el) => (
+          <EducationForm
+            formInfo={el.info}
+            key={el.id}
+            deleteForm={deleteForm}
+            id={el.id}
+            getInfoIndividual={getInfoIndividual}
+          />
+        ))
+      )}
+      <button className="btn-add" onClick={addForm}>
+        add
+      </button>
+    </div>
+  );
+};
 
 export default Education;

@@ -1,15 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import "../../assets/css/App.css";
 
-class EducationForm extends Component {
-  constructor(props) {
-    super(props);
-    this.inputHandler = this.inputHandler.bind(this);
-  }
-
-  inputHandler(e) {
+const EducationForm = ({ id, formInfo, getInfoIndividual, deleteForm }) => {
+  //manejador de los inputs
+  const inputHandler = (e) => {
     const inputName = e.target.name;
-    const { id, formInfo, getInfoIndividual } = this.props;
 
     switch (inputName) {
       case "UniversityName":
@@ -34,65 +29,63 @@ class EducationForm extends Component {
       default:
         console.log("not found");
     }
-  }
+  };
 
-  render() {
-    const { deleteForm, id } = this.props;
-    const { name, city, degree, subject, from, to } = this.props.formInfo;
-    return (
-      <>
-        <form>
-          <input
-            type="text"
-            placeholder="University name"
-            name="UniversityName"
-            onChange={this.inputHandler}
-            value={name}
-          />
-          <input
-            type="text"
-            placeholder="City"
-            name="City"
-            onChange={this.inputHandler}
-            value={city}
-          />
-          <input
-            type="text"
-            placeholder="Degree"
-            name="Degree"
-            onChange={this.inputHandler}
-            value={degree}
-          />
-          <input
-            type="text"
-            placeholder="Subject"
-            name="Subject"
-            onChange={this.inputHandler}
-            value={subject}
-          />
-          <input
-            type="text"
-            placeholder="From"
-            name="From"
-            onChange={this.inputHandler}
-            value={from}
-          />
-          <input
-            type="text"
-            placeholder="to"
-            name="To"
-            onChange={this.inputHandler}
-            value={to}
-          />
-          <div className="btn-part">
-            <button className="btn-edu" onClick={(e) => deleteForm(e, id)}>
-              delete
-            </button>
-          </div>
-        </form>
-      </>
-    );
-  }
-}
+  const { name, city, degree, subject, from, to } = formInfo;
+
+  return (
+    <>
+      <form>
+        <input
+          type="text"
+          placeholder="University name"
+          name="UniversityName"
+          onChange={inputHandler}
+          value={name}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          name="City"
+          onChange={inputHandler}
+          value={city}
+        />
+        <input
+          type="text"
+          placeholder="Degree"
+          name="Degree"
+          onChange={inputHandler}
+          value={degree}
+        />
+        <input
+          type="text"
+          placeholder="Subject"
+          name="Subject"
+          onChange={inputHandler}
+          value={subject}
+        />
+        <input
+          type="text"
+          placeholder="From"
+          name="From"
+          onChange={inputHandler}
+          value={from}
+        />
+        <input
+          type="text"
+          placeholder="to"
+          name="To"
+          onChange={inputHandler}
+          value={to}
+        />
+        <div className="btn-part">
+          <button className="btn-edu" onClick={(e) => deleteForm(e, id)}>
+            delete
+          </button>
+        </div>
+      </form>
+    </>
+  );
+};
 
 export default EducationForm;
