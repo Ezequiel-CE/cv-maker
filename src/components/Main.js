@@ -1,169 +1,154 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/css/App.css";
 import Personal from "./sections/Personal";
 import Education from "./sections/Education";
 import Work from "./sections/Work";
 import uniqid from "uniqid";
 
-class Main extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      personalInfo: {
-        firstName: "",
-        lastName: "",
-        profession: "",
-        address: "",
-        phoneNumber: "",
-        email: "",
-        description: "",
-      },
-      educationInfo: [
-        {
-          info: {
-            name: "",
-            city: "",
-            degree: "",
-            subject: "",
-            from: "",
-            to: "",
-          },
-          id: uniqid(),
-        },
-      ],
-      workInfo: [
-        {
-          info: {
-            position: "",
-            company: "",
-            city: "",
-            from: "",
-            to: "",
-          },
-          id: uniqid(),
-        },
-      ],
-    };
+const Main = ({ show, getInfo, info }) => {
+  const [personalInfo, setPersonalInfo] = useState({
+    firstName: "",
+    lastName: "",
+    profession: "",
+    address: "",
+    phoneNumber: "",
+    email: "",
+    description: "",
+  });
 
-    this.getInfoPersonal = this.getInfoPersonal.bind(this);
-    this.addFormEducation = this.addFormEducation.bind(this);
-    this.deleteFormEducation = this.deleteFormEducation.bind(this);
-    this.getInfoEducation = this.getInfoEducation.bind(this);
-    this.deleteFormWork = this.deleteFormWork.bind(this);
-    this.addFormWork = this.addFormWork.bind(this);
-    this.getInfoWork = this.getInfoWork.bind(this);
-    this.onclickPreview = this.onclickPreview.bind(this);
-  }
+  const [workInfo, setWorkInfo] = useState([
+    {
+      info: {
+        position: "",
+        company: "",
+        city: "",
+        from: "",
+        to: "",
+      },
+      id: uniqid(),
+    },
+  ]);
+
+  const [educationInfo, setEducationInfo] = useState([
+    {
+      info: {
+        name: "",
+        city: "",
+        degree: "",
+        subject: "",
+        from: "",
+        to: "",
+      },
+      id: uniqid(),
+    },
+  ]);
 
   //get info functions
 
-  getInfoPersonal(data) {
-    this.setState({ personalInfo: data });
-  }
+  const getInfoPersonal = (data) => {
+    setPersonalInfo(data);
+  };
 
-  getInfoEducation(data) {
-    this.setState({ educationInfo: data });
-  }
+  const getInfoEducation = (data) => {
+    setEducationInfo(data);
+  };
 
-  getInfoWork(data) {
-    this.setState({ workInfo: data });
-  }
+  const getInfoWork = (data) => {
+    setWorkInfo(data);
+  };
 
   //form education
 
-  addFormEducation(e) {
+  const addFormEducation = (e) => {
     e.preventDefault();
-    this.setState({
-      educationInfo: [
-        ...this.state.educationInfo,
-        {
-          info: {
-            name: "",
-            city: "",
-            degree: "",
-            subject: "",
-            from: "",
-            to: "",
-          },
-          id: uniqid(),
-        },
-      ],
-    });
-  }
 
-  deleteFormEducation(e, id) {
+    setEducationInfo([
+      ...educationInfo,
+      {
+        info: {
+          name: "",
+          city: "",
+          degree: "",
+          subject: "",
+          from: "",
+          to: "",
+        },
+        id: uniqid(),
+      },
+    ]);
+  };
+
+  const deleteFormEducation = (e, id) => {
     e.preventDefault();
-    this.setState({
-      educationInfo: this.state.educationInfo.filter((form) => form.id !== id),
-    });
-  }
+    setEducationInfo(educationInfo.filter((form) => form.id !== id));
+  };
 
   //form work
-  addFormWork(e) {
+  const addFormWork = (e) => {
     e.preventDefault();
-    this.setState({
-      workInfo: [
-        ...this.state.workInfo,
-        {
-          info: {
-            position: "",
-            company: "",
-            city: "",
-            from: "",
-            to: "",
-          },
-          id: uniqid(),
+    setWorkInfo([
+      ...workInfo,
+      {
+        info: {
+          position: "",
+          company: "",
+          city: "",
+          from: "",
+          to: "",
         },
-      ],
-    });
-  }
+        id: uniqid(),
+      },
+    ]);
+  };
 
-  deleteFormWork(e, id) {
+  const deleteFormWork = (e, id) => {
     e.preventDefault();
-    this.setState({
-      workInfo: this.state.workInfo.filter((form) => form.id !== id),
-    });
-  }
+    setWorkInfo(workInfo.filter((form) => form.id !== id));
+  };
 
-  onclickPreview() {
-    const { show, getInfo } = this.props;
-
-    const copy = { ...this.state };
+  const onclickPreview = () => {
+    const allInfoSections = { personalInfo, workInfo, educationInfo };
     show();
-    getInfo(copy);
-  }
+    getInfo(allInfoSections);
+  };
 
   //remember the data from the previous state
-  componentDidMount() {
-    const { info } = this.props;
-    this.setState(info);
-  }
+  // componentDidMount() {
+  //   const { info } = this.props;
+  //   this.setState(info);
+  // }
 
-  render() {
-    return (
-      <div className="main">
-        <Personal
-          getInfoPersonal={this.getInfoPersonal}
-          personalInfo={this.state.personalInfo}
-        />
-        <Education
-          addForm={this.addFormEducation}
-          deleteForm={this.deleteFormEducation}
-          educationInfo={this.state.educationInfo}
-          getInfoEducation={this.getInfoEducation}
-        />
-        <Work
-          addForm={this.addFormWork}
-          deleteForm={this.deleteFormWork}
-          workInfo={this.state.workInfo}
-          getInfoWork={this.getInfoWork}
-        />
-        <button className="btn-preview" onClick={this.onclickPreview}>
-          Preview
-        </button>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    //si info esta vacio sale
+    if (Object.keys(info).length === 0 && info.constructor === Object) return;
+
+    const { personalInfo, educationInfo, workInfo } = info;
+
+    setPersonalInfo(personalInfo);
+    setEducationInfo(educationInfo);
+    setWorkInfo(workInfo);
+  }, [info]);
+
+  return (
+    <div className="main">
+      <Personal getInfoPersonal={getInfoPersonal} personalInfo={personalInfo} />
+      <Education
+        addForm={addFormEducation}
+        deleteForm={deleteFormEducation}
+        educationInfo={educationInfo}
+        getInfoEducation={getInfoEducation}
+      />
+      <Work
+        addForm={addFormWork}
+        deleteForm={deleteFormWork}
+        workInfo={workInfo}
+        getInfoWork={getInfoWork}
+      />
+      <button className="btn-preview" onClick={onclickPreview}>
+        Preview
+      </button>
+    </div>
+  );
+};
 
 export default Main;
